@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+
+    <script>
+    
+    function randomInt(min, max) 
+    {//this function randomly generates an integer between and including the two parameters, min & max
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive 
+    }
+
+    var userScore = 0; //sets the user's score to 0 initially
+    var cpuScore = 0; //sets the computer's score to 0 initially
+    
+    for (i = 0; i < 15; i++)
+    { //this loop iterates a maximum of 15 times
+        if (userScore == 5)
+        { //if the user wins 5 rounds
+            alert ("Game over, User wins!");
+            i = 15; //breaks out of the for loop
+        }
+        else if (cpuScore == 5)
+        { //if the computer wins 5 rounds
+            alert ("Game over, Computer wins!");
+            i = 15; //breaks out of the for loop
+        }
+        else
+        { //this contains the majority of the logic of the site
+            var rps = ["rock", "paper", "scissors"]; //initialises an array with rock, paper and scissors for the computer to select from
+            var cpuRPS = rps[randomInt(0,2)]; //uses the randomInt function to generate 0, 1 or 2 which will be the index for the array
+            
+            var userRPS = prompt("Do you choose rock, paper or scissors?"); //ask the user to type choose rock, paper or scissors and store in a variable
+            userRPS = userRPS.toLowerCase(); //ensure the user's answer is in lower case
+
+            alert("The computer chose " + cpuRPS); //tells the user whether the computer chose rock, paper or scissors
+
+            if (userRPS === cpuRPS)
+            { //if the user and computer choose the same
+                alert("Tie");
+            }
+            else if (((userRPS === "rock") && (cpuRPS === "scissors")) || ((userRPS === "scissors") && (cpuRPS === "paper")) || ((userRPS === "paper") && (cpuRPS === "rock")))
+            { //if the user wins
+                alert("User wins point");
+                userScore++; //add 1 point to the user's total
+            }
+            else if (((userRPS === "rock") && (cpuRPS === "paper")) || ((userRPS === "scissors") && (cpuRPS === "rock")) || ((userRPS === "paper") && (cpuRPS === "scissors")))
+            { //if the computer wins
+                alert("Computer wins point");
+                cpuScore++; //add 1 point to the computer's total
+            }
+            alert("The score is User: " + userScore + " Computer: " + cpuScore); //score update
+        }
+    }
+    
+    </script>
+
+  </body>
+</html>
